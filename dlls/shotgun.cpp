@@ -22,10 +22,6 @@
 #include "player.h"
 #include "gamerules.h"
 
-// special deathmatch shotgun spreads
-#define VECTOR_CONE_DM_SHOTGUN	Vector( 0.08716, 0.04362, 0.00 )// 10 degrees by 5 degrees
-#define VECTOR_CONE_DM_DOUBLESHOTGUN Vector( 0.17365, 0.04362, 0.00 ) // 20 degrees by 5 degrees
-
 enum shotgun_e
 {
 	SHOTGUN_IDLE = 0,
@@ -158,7 +154,7 @@ void CShotgun::PrimaryAttack()
 	if( g_pGameRules->IsMultiplayer() )
 #endif
 	{
-		vecDir = m_pPlayer->FireBulletsPlayer( 4, vecSrc, vecAiming, VECTOR_CONE_DM_SHOTGUN, 2048, BULLET_PLAYER_BUCKSHOT, 0, 0, m_pPlayer->pev, m_pPlayer->random_seed );
+		vecDir = m_pPlayer->FireBulletsPlayer( 6, vecSrc, vecAiming, VECTOR_CONE_10DEGREES, 2048, BULLET_PLAYER_BUCKSHOT, 0, 0, m_pPlayer->pev, m_pPlayer->random_seed );
 	}
 	else
 	{
@@ -186,74 +182,6 @@ void CShotgun::PrimaryAttack()
 
 void CShotgun::SecondaryAttack( void )
 {
-	// don't fire underwater
-	if( m_pPlayer->pev->waterlevel == 3 )
-	{
-		PlayEmptySound();
-		m_flNextPrimaryAttack = GetNextAttackDelay( 0.15f );
-		return;
-	}
-
-	if( m_iClip <= 1 )
-	{
-		Reload();
-		PlayEmptySound();
-		return;
-	}
-
-	m_pPlayer->m_iWeaponVolume = LOUD_GUN_VOLUME;
-	m_pPlayer->m_iWeaponFlash = NORMAL_GUN_FLASH;
-
-	m_iClip -= 2;
-
-	int flags;
-#if CLIENT_WEAPONS
-	flags = FEV_NOTHOST;
-#else
-	flags = 0;
-#endif
-	m_pPlayer->pev->effects = (int)( m_pPlayer->pev->effects ) | EF_MUZZLEFLASH;
-
-	// player "shoot" animation
-	m_pPlayer->SetAnimation( PLAYER_ATTACK1 );
-
-	Vector vecSrc = m_pPlayer->GetGunPosition();
-	Vector vecAiming = m_pPlayer->GetAutoaimVector( AUTOAIM_5DEGREES );
-
-	Vector vecDir;
-
-#if CLIENT_DLL
-	if( bIsMultiplayer() )
-#else
-	if( g_pGameRules->IsMultiplayer() )
-#endif
-	{
-		// tuned for deathmatch
-		vecDir = m_pPlayer->FireBulletsPlayer( 8, vecSrc, vecAiming, VECTOR_CONE_DM_DOUBLESHOTGUN, 2048, BULLET_PLAYER_BUCKSHOT, 0, 0, m_pPlayer->pev, m_pPlayer->random_seed );
-	}
-	else
-	{
-		// untouched default single player
-		vecDir = m_pPlayer->FireBulletsPlayer( 12, vecSrc, vecAiming, VECTOR_CONE_10DEGREES, 2048, BULLET_PLAYER_BUCKSHOT, 0, 0, m_pPlayer->pev, m_pPlayer->random_seed );
-	}
-
-	PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), m_usDoubleFire, 0.0f, g_vecZero, g_vecZero, vecDir.x, vecDir.y, 0, 0, 0, 0 );
-
-	if( !m_iClip && m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] <= 0 )
-		// HEV suit - indicate out of ammo condition
-		m_pPlayer->SetSuitUpdate( "!HEV_AMO0", FALSE, 0 );
-
-	//if( m_iClip != 0 )
-		m_flPumpTime = gpGlobals->time + 0.95f;
-
-	m_flNextPrimaryAttack = GetNextAttackDelay( 1.5f );
-	m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + 1.5f;
-	if( m_iClip != 0 )
-		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 6.0f;
-	else
-		m_flTimeWeaponIdle = 1.5;
-
-	m_fInSpecialReload = 0;
 }
 
 void CShotgun::Reload( void )
