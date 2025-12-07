@@ -229,7 +229,7 @@ void CHalfLifeMultiplay::Think( void )
 	}
 
 	float flTimeLimit = timelimit.value * 60;
-	float flTimeLimitReal = timelimit.value
+	float flTimeLimitReal = timelimit.value;
 	float flFragLimit = fraglimit.value;
 	float flTimeLeft = timeleft.value;
 	float flFragLeft = fragleft.value;
@@ -240,85 +240,102 @@ void CHalfLifeMultiplay::Think( void )
 	if( flTimeLeft == 1800 && flTimeLimitReal != 30 )
 	{
 		m_pPlayer->SetSuitUpdate( "!30MIN", FALSE, 0 );
+		return;
 	}
 	
 	if( flTimeLeft == 1200 && flTimeLimitReal != 20 )
 	{
 		m_pPlayer->SetSuitUpdate( "!20MIN", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 900 && flTimeLimitReal != 15 )
 	{
 		m_pPlayer->SetSuitUpdate( "!15MIN", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 600 && flTimeLimitReal != 10 )
 	{
 		m_pPlayer->SetSuitUpdate( "!10MIN", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 300 && flTimeLimitReal != 5 )
 	{
 		m_pPlayer->SetSuitUpdate( "!5MIN", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 60 && flTimeLimitReal != 1 )
 	{
 		m_pPlayer->SetSuitUpdate( "!60SEC", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 30 )
 	{
 		m_pPlayer->SetSuitUpdate( "!30SEC", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 10 )
 	{
 		m_pPlayer->SetSuitUpdate( "!10SEC", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 9 )
 	{
 		m_pPlayer->SetSuitUpdate( "!9SEC", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 8 )
 	{
 		m_pPlayer->SetSuitUpdate( "!8SEC", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 7 )
 	{
 		m_pPlayer->SetSuitUpdate( "!7SEC", FALSE, 0 );
+		return;
 	}
 	if( flTimeLeft == 6 )
 	{
 		m_pPlayer->SetSuitUpdate( "!6SEC", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 5 )
 	{
 		m_pPlayer->SetSuitUpdate( "!5SEC", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 4 )
 	{
 		m_pPlayer->SetSuitUpdate( "!4SEC", FALSE, 0 );
+		return;
 	}
 	
 	if( flTimeLeft == 3 )
 	{
 		m_pPlayer->SetSuitUpdate( "!3SEC", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 2 )
 	{
 		m_pPlayer->SetSuitUpdate( "!2SEC", FALSE, 0 );
+		return;
 	}
 
 	if( flTimeLeft == 1 )
 	{
 		m_pPlayer->SetSuitUpdate( "!1SEC", FALSE, 0 );
+		return;
 	}
 	
 	if( flTimeLimit != 0 && gpGlobals->time >= flTimeLimit )
