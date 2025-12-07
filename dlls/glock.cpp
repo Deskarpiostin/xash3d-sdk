@@ -106,7 +106,6 @@ BOOL CGlock::Deploy()
 
 void CGlock::SecondaryAttack( void )
 {
-	GlockFire( 0.1f, 0.2f, FALSE );
 }
 
 void CGlock::PrimaryAttack( void )
