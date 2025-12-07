@@ -238,14 +238,20 @@ void CBasePlayer::Pain( void )
 {
 	float flRndSound;//sound randomizer
 
-	flRndSound = RANDOM_FLOAT( 0.0f, 1.0f ); 
+	flRndSound = RANDOM_FLOAT( 0.0f, 0.6f ); 
 
-	if( flRndSound <= 0.33f )
-		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pl_pain5.wav", 1, ATTN_NORM );
-	else if( flRndSound <= 0.66f )	
-		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pl_pain6.wav", 1, ATTN_NORM );
+	if( flRndSound <= 0.1f )
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pain1.wav", 1, ATTN_NORM );
+	else if( flRndSound <= 0.2f )	
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pain2.wav", 1, ATTN_NORM );
+	else if( flRndSound <= 0.3f )
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pain3.wav", 1, ATTN_NORM );
+	else if( flRndSound <= 0.4f )
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pain4.wav", 1, ATTN_NORM );
+	else if( flRndSound <= 0.5f )	
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pain5.wav", 1, ATTN_NORM );
 	else
-		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pl_pain7.wav", 1, ATTN_NORM );
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pain6.wav", 1, ATTN_NORM );
 }
 
 Vector VecVelocityForDamage( float flDamage )
@@ -329,30 +335,31 @@ int TrainSpeed( int iSpeed, int iMax )
 void CBasePlayer::DeathSound( void )
 {
 	// water death sounds
-	/*
 	if( pev->waterlevel == 3 )
 	{
 		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/h2odeath.wav", 1, ATTN_NONE );
 		return;
 	}
-	*/
 
 	// temporarily using pain sounds for death sounds
 	switch( RANDOM_LONG( 1, 5 ) )
 	{
 	case 1: 
-		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pl_pain5.wav", 1, ATTN_NORM );
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/death1.wav", 1, ATTN_NORM );
 		break;
 	case 2: 
-		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pl_pain6.wav", 1, ATTN_NORM );
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/death2.wav", 1, ATTN_NORM );
 		break;
 	case 3: 
-		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/pl_pain7.wav", 1, ATTN_NORM );
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/death3.wav", 1, ATTN_NORM );
+		break;
+	case 4: 
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/death4.wav", 1, ATTN_NORM );
+		break;
+	case 5: 
+		EMIT_SOUND( ENT( pev ), CHAN_VOICE, "player/death5.wav", 1, ATTN_NORM );
 		break;
 	}
-
-	// play one of the suit death alarms
-	EMIT_GROUPNAME_SUIT( ENT( pev ), "HEV_DEAD" );
 }
 
 // override takehealth
