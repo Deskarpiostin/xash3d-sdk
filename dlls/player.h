@@ -17,6 +17,7 @@
 #define PLAYER_H
 
 #include "pm_materials.h"
+#define PRECACHE_SOUND		(*g_engfuncs.pfnPrecacheSound)
 
 #define PLAYER_FATAL_FALL_SPEED		1024// approx 60 feet
 #define PLAYER_MAX_SAFE_FALL_SPEED	580// approx 20 feet
