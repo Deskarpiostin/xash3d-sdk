@@ -1,7 +1,7 @@
 # Half-Life SDK for Xash3D [![Build Status](https://travis-ci.org/FWGS/hlsdk-xash3d.svg)](https://travis-ci.org/FWGS/hlsdk-xash3d)
 
 Half-Life SDK for Xash3D & GoldSource with some fixes.
-
+Out of date.
 ## How to build
 
 ### CMake as most universal way
